@@ -6,16 +6,41 @@ import { Component } from '@angular/core';
   <div class="container">
     <h1>Recipe Box</h1>
     <h3>{{currentFocus}} for {{month}}/{{day}}/{{year}}</h3>
-    <ul>
-      <li *ngFor="let currentRecipe of recipes">{{currentRecipe.title}}
-        <ul>
-          <li>{{currentRecipe.ingredients}}</li>
-        </ul>
-        <ul>
-          <li>{{currentRecipe.directions}}</li>
-        </ul>
-      </li>
-    </ul>
+    <div class="row">
+      <ul>
+        <div (click)="showDetails(currentRecipe)" *ngFor="let currentRecipe of recipes">
+        {{currentRecipe.title}}
+        <button (click)="editRecipe(currentRecipe)">Edit!</button></div>
+      </ul>
+    </div>
+    <br>
+    <div *ngIf="selectedRecipe">
+      <h3>Ingredients for {{selectedRecipe.title}}</h3>
+      <ul>
+        <li>{{selectedRecipe.ingredients}}</li>
+      </ul>
+      <ul>
+        <li>{{selectedRecipe.directions}}</li>
+      </ul>
+      <button (click)="finishedViewing()">Hide</button>
+    </div>
+
+    <div *ngIf="editedRecipe">
+      <h3>Edit Recipe</h3>
+      <label>Enter Recipe Title:</label>
+      <input [(ngModel)]="editedRecipe.title">
+      <br>
+
+      <label>Enter Ingredients:</label>
+      <input [(ngModel)]="editedRecipe.ingredients">
+      <br>
+
+      <label>Enter Directions:</label>
+      <input [(ngModel)]="editedRecipe.directions">
+      <br>
+
+      <button (click)="finishedEditing()">Done</button>
+    </div>
   </div>
   `
 })
@@ -31,6 +56,30 @@ export class AppComponent {
     new Recipe("Tacos", ["tortilla", " meat", " cheese", " lettuce"], "Place ingredients in taco shell"),
     new Recipe("Chicken noodle soup", ["can of soup"], "open can and place in bowl")
   ];
+
+  editedRecipe = null;
+  selectedRecipe = null;
+
+  editRecipe(clickedRecipe) {
+    this.editedRecipe = clickedRecipe;
+  }
+
+  showDetails(clickedRecipe: Recipe) {
+    this.selectedRecipe = clickedRecipe;
+  }
+
+  finishedEditing() {
+    this.editedRecipe = null;
+  }
+
+  finishedViewing() {
+    this.selectedRecipe = null;
+  }
+
+
+
+
+
 }
 
 export class Recipe {
