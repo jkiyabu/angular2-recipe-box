@@ -1,0 +1,36 @@
+.title:hover {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.jumbotron {
+  text-align: center;
+  background-image: url(/resources/images/oranges.jpeg);
+  color: darkgreen;
+  border: 30px solid #b3b300;
+  font-family: cursive;
+}
+
+.jumbotron h1 {
+  font-size: 100px;
+  font-weight: 900;
+}
+
+body {
+  background-color: #473d1f;
+  color: orange;
+  text-shadow: 10px 10px purple;
+}
+
+img {
+  width: 700px;
+  display: block;
+  margin: auto;
+  border: 10px solid #4d4d00;
+}
+
+.btn {
+  background-color: #4d4d00;
+  color: pink;
+}

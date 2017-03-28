@@ -4,13 +4,16 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
   <div class="container">
-    <h1>Recipe Box</h1>
+    <div class="jumbotron">
+      <h1>Recipe Box</h1>
+    </div>
+    <img src="resources/images/patrick.gif">
     <h3>{{currentFocus}} for {{month}}/{{day}}/{{year}}</h3>
     <div class="row">
       <ul>
-        <div (click)="showDetails(currentRecipe)" *ngFor="let currentRecipe of recipes">
-        {{currentRecipe.title}}
-        <button (click)="editRecipe(currentRecipe)">Edit!</button></div>
+        <div class="title" (click)="showDetails(currentRecipe)" *ngFor="let currentRecipe of recipes">
+        <h2>{{currentRecipe.title}}</h2>
+        </div>
       </ul>
     </div>
     <br>
@@ -22,7 +25,8 @@ import { Component } from '@angular/core';
       <ul>
         <li>{{selectedRecipe.directions}}</li>
       </ul>
-      <button (click)="finishedViewing()">Hide</button>
+      <button class="btn"(click)="editRecipe(selectedRecipe)">Edit!</button>
+      <button class="btn"(click)="finishedViewing()">Hide</button>
     </div>
 
     <div *ngIf="editedRecipe">
@@ -64,7 +68,7 @@ export class AppComponent {
     this.editedRecipe = clickedRecipe;
   }
 
-  showDetails(clickedRecipe: Recipe) {
+  showDetails(clickedRecipe) {
     this.selectedRecipe = clickedRecipe;
   }
 
@@ -75,10 +79,6 @@ export class AppComponent {
   finishedViewing() {
     this.selectedRecipe = null;
   }
-
-
-
-
 
 }
 
